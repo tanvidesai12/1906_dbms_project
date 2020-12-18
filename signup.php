@@ -1,6 +1,28 @@
 <?php 
 include_once 'header.php';
+$message="";
+if(isset($_POST["signup"])){
+$name=$_POST["name"];
+$email=$_POST["email"];
+$password=$_POST["pwd"];
+$phonenumber=$_POST["phone"];
+
+$s="select * from loginuser where email='$email'";
+$result=mysqli_query($conn,$s);
+
+$num=mysqli_num_rows($result);
+if($num==1){
+   $message="Email Already Taken";
+}
+else{
+    $reg= "insert into loginuser(username,email,password,phone_num) values('$name','$email','$password','$phonenumber')";
+    mysqli_query($conn,$reg);
+    $message="Registration Sucessful";
+}
+}
+
 ?>
+
 <head>
     <title>Sign Up Form</title>
   
@@ -12,25 +34,28 @@ include_once 'header.php';
             <div class="row">
                 <div class="col-md-6">
                     <div class="myLeftCtn"> 
-                        <form class="myForm text-center">
+                        <form class="myForm text-center"  action="signup.php" method="post">
                             <header>Create new account</header>
+                             <?php if(!empty($message)){
+                                echo $message;
+                            }?>
                             <div class="form-group">
                                 <i class="fas fa-user"></i>
-                                <input class="myInput" type="text" placeholder="Your Name" id="username" required> 
+                                <input class="myInput" type="text" placeholder="Your Name" id="username" name="name" required> 
                             </div>
 
                             <div class="form-group">
                                 <i class="fas fa-envelope"></i>
-                                <input class="myInput" placeholder="Email" type="email" id="email" required> 
+                                <input class="myInput" placeholder="Email" type="email" id="email" name="email" required> 
                             </div>
 
                             <div class="form-group">
                                 <i class="fas fa-lock"></i>
-                                <input class="myInput" type="password" id="password" placeholder="Password" required> 
+                                <input class="myInput" type="password" name="pwd" id="password" placeholder="Password" required> 
                             </div>
                             <div class="form-group">
                                 <i class="fas fa-phone"></i>
-                                <input class="myInput" type="tel" placeholder="Phone Number" id="example-tel-input" pattern="[0-9]{5}-[0-9]{5}" required>
+                                <input class="myInput" type="tel" name="phone" placeholder="Phone Number" id="example-tel-input" pattern="[0-9]{5}-[0-9]{5}" required>
                             </div>
 <!-- 
                             <div class="form-group">
@@ -39,14 +64,14 @@ include_once 'header.php';
                                     <div class="invalid-feedback">You must check the box.</div>
                                 </label>
                             </div> -->
-                            <div class="form-group form-check form-check-inline">
+                            <!-- <div class="form-group form-check form-check-inline">
                               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                               <label class="form-check-label myLabel" for="inlineRadio1 ">MALE</label>
                             </div>
                             <div class="form-group form-check form-check-inline">
                               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                               <label class="form-check-label myLabel" for="inlineRadio2">FEMALE</label>
-                            </div>
+                            </div> -->
                             <!-- Group of material radios - option 2 -->
                             <!-- <div class="form-check">
                               <input type="radio" class="form-check-input" id="materialGroupExample2" name="groupOfMaterialRadios" checked>
@@ -55,9 +80,9 @@ include_once 'header.php';
                             <!-- <label for="phone">Enter your phone number:</label>
 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"> -->
                             
-                            <input type="submit" class="butt" value="CREATE ACCOUNT">
+                            <input type="submit" name="signup" class="butt" value="CREATE ACCOUNT">
                             <!-- <input type="submit" class="butt" value="LOG IN"> -->
-                            <p id=loginid>Already have an account?<a href="login-bootstrap.php">LOG IN</a></p>
+                            <p id=loginid>Already have an account?<a href="login.php">LOG IN</a></p>
                         </form>
                     </div>
                 </div> 

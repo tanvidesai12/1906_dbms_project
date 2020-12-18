@@ -1,5 +1,21 @@
 <?php 
 include_once 'header.php';
+
+$message="";
+if(count($_POST)>0) {
+ 
+$result = mysqli_query($conn,"SELECT * FROM loginuser WHERE email='" . $_POST["email"] . "' and password = '". $_POST["password"]."'");
+$row  = mysqli_fetch_array($result);
+if(is_array($row)) {
+$_SESSION["id"] = $row['id'];
+$_SESSION["username"] = $row['username'];
+} else {
+$message = "Invalid Username or Password!";
+}
+}
+if(isset($_SESSION["id"])) {
+    echo '<script>window.location.href = "index.php";</script>' ; 
+}
 ?>
 <head>
     <title>Login Form </title>
@@ -12,26 +28,28 @@ include_once 'header.php';
             <div class="row">
                 <div class="col-md-6">
                     <div class="myLeftCtn"> 
-                        <form class="myForm text-center">
+                        <form class="myForm text-center" method="post">
                             <header>LOG IN</header>
                             <!-- <div class="form-group">
                                 <i class="fas fa-user"></i>
                                 <input class="myInput" type="text" placeholder="Your Name" id="username" required> 
                             </div> -->
-
+                            <?php if(!empty($message)){
+                                echo $message;
+                            }?>
                             <div class="form-group">
                                 <i class="fas fa-envelope"></i>
-                                <input class="myInput" placeholder="Email" type="email" id="email" required> 
+                                <input class="myInput" placeholder="Email" name="email" type="email" id="email" required> 
                             </div>
 
                             <div class="form-group">
                                 <i class="fas fa-lock"></i>
-                                <input class="myInput" type="password" id="password" placeholder="Password" required> 
+                                <input class="myInput" type="password" name="password" id="password" placeholder="Password" required> 
                             </div>
                         
                             <input type="submit" class="butt" value="LOG IN">
                             <!-- <input type="submit" class="butt" value="LOG IN"> -->
-                            <p id=loginid>Dont have an account?<a href="signup-bootstrap.php">SIGNUP</a></p>
+                            <p id=loginid>Dont have an account?<a href="signup.php">SIGNUP</a></p>
                         </form>
                     </div>
                 </div> 

@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+session_start();
+include 'dbc.inc.php';
+?>
 <html>
 <head>
 	<title>Pet Supplies Store</title>
@@ -140,7 +144,7 @@ left: 8%;
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link pr-4" href="MyIndex.php">Home </a>
+        <a class="nav-link pr-4" href="index.php">Home </a>
       </li>
       <li class="nav-item">
         <a class="nav-link pr-4" href="#">About</a>
@@ -233,8 +237,13 @@ left: 8%;
       </li>
     </ul>
      <form class="form-inline ml-auto">
-     	<a href="login-bootstrap.php" class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size"> <i class="fas fa-user" style="color:#fff;"></i> Log in</a>
-     	<a href=""  class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size" > <i class="fas fa-shopping-cart" style="color:#fff;"></i> Cart</a>
+      <?php if(isset($_SESSION["id"])) {?>
+    <a href="logout.php" class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size"> <i class="fas fa-user" style="color:#fff;"></i> Hello <?= $_SESSION["username"] ?> Logout</a>
+<?php }else{ ?>
+     	<a href="login.php" class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size"> <i class="fas fa-user" style="color:#fff;"></i> Log in</a>
+     <?php } ?>
+
+     	<a href="shopping_cart.php"  class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size" > <i class="fas fa-shopping-cart" style="color:#fff;"></i><span id="cart_item" class="badge badge-danger">0</span> Cart</a>
   </form>
  <!--  <ul class="navbar-nav ml-auto">
   <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user" style="color:#fff;"> Sign Up </i></a></li>

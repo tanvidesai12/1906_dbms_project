@@ -1,5 +1,6 @@
 <?php 
 include_once 'header.php';
+
 ?>
 <!-- carousel with caption -->
 <div class="mycarousel">
@@ -20,7 +21,7 @@ include_once 'header.php';
         			<h1>Dog Toys</h1>
         			<h2>Get Upto 30% off</h2>
         			<h2>New Arrivals</h2>
-        			<button class="btn0 mt-3 ml-2">SHOP NOW</button>
+        			<a href="product.php" class="button btn0 mt-3 ml-2">SHOP NOW</a>
         		</div>
         	</div>
 
