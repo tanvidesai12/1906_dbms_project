@@ -1,4 +1,48 @@
-<?php include 'header.php' 
+<?php 
+include 'header.php' ;
+if(isset($_POST["checkout_item"]))
+{
+  $address =$_POST['address'];
+  $city =$_POST['city'];
+  $state =$_POST['state'];
+  $pincode =$_POST['zip'];
+  $cid =$_SESSION['id'];
+  $paymentmethod = $_POST['paymentmethod'];
+  
+   $sql2 = "SELECT * FROM cart where cid='".$cid."'";
+    $result2 = $conn->query($sql2);
+
+if ($result2->num_rows > 0) {
+    // output data of each row
+    while($row = $result2->fetch_assoc()) {
+      $sql3 = "SELECT * FROM products where prod_id=".$row['pid'];
+      $result4 = $conn->query($sql3);
+      $values = $result4->fetch_assoc();
+      $pid=$row['pid'];
+      $price=$values['price'];
+      $quan=$row['quantity'];
+    $sqldata = "INSERT INTO `orders`(`pid`, `price`, `quantity`, `cid`, `address`, `city`, `state`, `pincode`, `pay_method`) VALUES ('$pid','$price','$quan','$cid','$address','$city','$state','$pincode','$paymentmethod')";
+
+    // $sqladd = "INSERT INTO `orders` (`address`, `city, `state`,`pincode`,`cid`) VALUES ('".$_POST["address"]."', '".$_POST["city"]."', '".$_POST["state"]."','".$_POST["zip"]."','".$_SESSION["id"]."');";
+     if($conn->query($sqldata) === TRUE)
+    {
+      $sql8 = "DELETE FROM `cart` WHERE cid='".$cid."'";
+      $result8 = $conn->query($sql8);
+      $conn->query($sql8);
+    
+    } 
+    else{
+      echo 'not inserted'.$conn -> error;
+      
+      
+    }
+    }
+    echo '<script>alert("Order Placed")</script>';
+    echo '<script>window.location.href="orders.php"</script>';
+    }  
+   
+}
+
 ?>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,7 +63,7 @@
       while($row=mysqli_fetch_assoc($querry_run)){
         ?>
     <div class="container">
-      <form action="/action_page.php" method="post">
+      <form action="#" method="post">
       
         <div class="row">
           <div class="col-50">
@@ -43,40 +87,36 @@
                 <input class="inp" type="text" id="zip" name="zip" required>
               </div>
             </div>
+            <h3>Payment Method</h3>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentmethod" id="paymentmethod1" value="cash on delivery" checked>
+            <label class="form-check-label" for="paymentmethod1">
+              CASH ON DELIVERY
+            </label>
           </div>
-
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentmethod" id="paymentmethod2" value="credit card">
+            <label class="form-check-label" for="paymentmethod2">
+              CREDIT CARD
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="paymentmethod" id="paymentmethod3" value="debit card">
+            <label class="form-check-label" for="paymentmethod3">
+              DEBIT CARD
+            </label>
+          </div>
+          </div>
+<!-- 
           <div class="col-50">
-            <h3>Payment</h3>
-            <label for="fname">Accepted Cards</label>
-            <div class="icon-container">
-              <i class="fa fa-cc-visa" style="color:navy;"></i>
-              <i class="fa fa-cc-amex" style="color:blue;"></i>
-              <i class="fa fa-cc-mastercard" style="color:red;"></i>
-              <i class="fa fa-cc-discover" style="color:orange;"></i>
-            </div>
-            <label for="cname">Name on Card</label>
-            <input class="inp" type="text" id="cname" name="cardname" >
-            <label for="ccnum">Credit card number</label>
-            <input class="inp" type="text" id="ccnum" name="cardnumber" >
-            <label for="expmonth">Exp Month</label>
-            <input class="inp" type="text" id="expmonth" name="expmonth" >
-            <div class="row">
-              <div class="col-50">
-                <label for="expyear">Exp Year</label>
-                <input class="inp" type="text" id="expyear" name="expyear" >
-              </div>
-              <div class="col-50">
-                <label for="cvv">CVV</label>
-                <input class="inp" type="text" id="cvv" name="cvv">
-              </div>
-            </div>
-          </div>
+            
+          </div> -->
           
         </div>
       <!--   <label>
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label> -->
-        <input type="submit" value="Continue to checkout" class="btn1">
+        <input type="submit" name="checkout_item" value="Place Order" class="btn1">
       </form>
     </div>
     <?php

@@ -164,8 +164,8 @@ left: 8%;
           <ul class="submenu dropdown-menu">
           <li><a class="dropdown-item" href="">Toys  &raquo</a>
           <ul class="submenu dropdown-menu">
-              <li><a class="dropdown-item" href="">Fetch & Tug Toys</a></li>
-              <li><a class="dropdown-item" href="">Rope Toys</a></li>
+              <li><a class="dropdown-item" href="fetch_tug_toys.php">Fetch & Tug Toys</a></li>
+              <li><a class="dropdown-item" href="rope_toys.php">Rope Toys</a></li>
            </ul>
         </li>
           <li><a class="dropdown-item" href="">Dog Food &raquo</a>
@@ -238,12 +238,12 @@ left: 8%;
     </ul>
      <form class="form-inline ml-auto">
       <?php if(isset($_SESSION["id"])) {?>
-    <a href="logout.php" class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size"> <i class="fas fa-user" style="color:#fff;"></i> Hello <?= $_SESSION["username"] ?> Logout</a>
+    <a href="logout.php" class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size"> <i class="fas fa-user" style="color:#fff;"></i> Hello <?= $_SESSION["username"] ?> || Logout</a>
 <?php }else{ ?>
      	<a href="login.php" class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size"> <i class="fas fa-user" style="color:#fff;"></i> Log in</a>
      <?php } ?>
 
-     	<a href="shopping_cart.php"  class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size" > <i class="fas fa-shopping-cart" style="color:#fff;"></i><span id="cart_item" class="badge badge-danger">0</span> Cart</a>
+     	<a href="shopping_cart.php"  class="btn btn-sm  text-secondary font-weight-bold pr-5 font-size" > <i class="fas fa-shopping-cart" style="color:#fff;"></i><span id="cart_item" class="badge badge-danger"></span> Cart</a>
   </form>
  <!--  <ul class="navbar-nav ml-auto">
   <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user" style="color:#fff;"> Sign Up </i></a></li>

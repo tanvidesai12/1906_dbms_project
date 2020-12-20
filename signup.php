@@ -55,7 +55,7 @@ else{
                             </div>
                             <div class="form-group">
                                 <i class="fas fa-phone"></i>
-                                <input class="myInput" type="tel" name="phone" placeholder="Phone Number" id="example-tel-input" pattern="[0-9]{5}-[0-9]{5}" required>
+                                <input class="myInput" type="tel" name="phone" placeholder="Phone Number" id="example-tel-input"  required>
                             </div>
 <!-- 
                             <div class="form-group">

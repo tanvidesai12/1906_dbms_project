@@ -21,7 +21,7 @@ include_once 'header.php';
         			<h1>Dog Toys</h1>
         			<h2>Get Upto 30% off</h2>
         			<h2>New Arrivals</h2>
-        			<a href="product.php" class="button btn0 mt-3 ml-2">SHOP NOW</a>
+        			<a href="product.php" class="button btn0 mt-3 ml-2" role="button">SHOP NOW</a>
         		</div>
         	</div>
 
@@ -37,6 +37,7 @@ include_once 'header.php';
         			<h1>Cat Sweaters</h1>
         			<h2>Get Upto 30% off</h2>
         			<h2>New Arrivals</h2>
+              <a href="product.php" class="button btn0 mt-3 ml-2" role="button">SHOP NOW</a>
         		</div>
         	</div>
 
@@ -52,6 +53,7 @@ include_once 'header.php';
         			<h1>Pet Food</h1>
         			<h2>Get Upto 30% off</h2>
         			<h2>New Arrivals</h2>
+              <a href="product.php" class="button btn0 mt-3 ml-2" role="button">SHOP NOW</a>
         		</div>
         	</div>
 
@@ -80,7 +82,7 @@ include_once 'header.php';
 			<div class="col-lg-3">
 				<div class="card">
 					<img src="images/toy_category.jpg" class="img-fluid mb-2" alt="">
-					<a href="" class="text-center">TOYS</a>
+					<a href="toys.php" class="text-center">TOYS</a>
 				</div>
 			</div>
 			<div class="col-lg-3">

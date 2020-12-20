@@ -69,14 +69,16 @@ if(isset($_GET["action"]))
 	<div class="row mt-5 ml-5">
 		<?php
 		require 'dbc.inc.php';
-		$query = "SELECT * FROM products";
+		 // $query = "SELECT * FROM products where subcat_id=1";
+		$query="SELECT * from products, subcategory where products.subcat_id=subcategory.id and subcategory.cat_id=7";
+
 		$querry_run = mysqli_query($conn,$query);
 		$check_products = mysqli_num_rows($querry_run)>0;
 		if($check_products){
 			while($row=mysqli_fetch_assoc($querry_run)){
 				?>
 				<div class="col-md-4 mt-3">
-					<form method="post" action="product.php?action=add&prod_id=<?=$row["prod_id"]?>">
+					<form method="post" action="toys.php?action=add&prod_id=<?=$row["prod_id"]?>">
 					<div class="card"> 
 						<img src="images/<?=$row['prod_img']?> " height="250px" class="card-img-top" alt="product images"> 
 						<div class="card body">
@@ -94,13 +96,7 @@ if(isset($_GET["action"]))
 
 						<input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>" />
 						<!-- <p class="card text"><?php echo $row['description'];?></p> -->
-
-						<?php if(isset($_SESSION["id"])) {?>
-    <input type="submit" name="add_to_cart" class="btn btn-success" value="Add to Cart" />
-<?php }else{ ?>
-     	<input type="submit" name="add_to_cart" class="btn btn-success" value="Add to Cart (Login)" disabled="" />
-     <?php } ?>
-						
+						<input type="submit" name="add_to_cart" class="btn btn-success" value="Add to Cart" />
 						</div>
 					</div>
 					</form>
@@ -117,28 +113,7 @@ if(isset($_GET["action"]))
 	</div>
 
 		</div>
-	<!-- <script type="text/javascript">
-		//setting default attribute to disabled of minus button
-		// document.querySelector(".minus-btn").setAttribute("disabled","disabled");
-		var valueCount
-		//plus button
-		function plus(){
-			//getting value of input
-			valueCount =document.getElementById("quant").value;
-			valueCount++;
-			//setting increment input value
-			document.getElementById("quant").value=valueCount;
-		}
-
-		//minus button
-		function minus(){
-			//getting value of input
-			valueCount =document.getElementById("quant").value;
-			valueCount--;
-			//setting increment input value
-			document.getElementById("quant").value=valueCount;
-		}
-	</script> -->
+	
 <?php 
 include_once 'footer.php';
 ?>
